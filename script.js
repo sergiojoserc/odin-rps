@@ -1,5 +1,3 @@
-console.log("Hello World!");
-
 function getRandomInt (n){
     return Math.floor(Math.random() * n);
 }
@@ -35,29 +33,59 @@ function playRound(humanChoice, computerChoice){
 
     if (humanChoice === computerChoice){
         console.log(`Tie! You both chose ${humanChoice}!`);
-        return "Tie";
+        humanScore +=  1;
+        computerScore +=  1;
+        //return "Tie";
     }
     else if (
         (humanChoice === "rock" && computerChoice === "scissors")||
         (humanChoice === "paper" && computerChoice === "rock")||
         (humanChoice === "scissors" && computerChoice === "paper" )){
         console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return "Player";}
+        humanScore +=  1;
+        //return "Player";
+        }
     else {
         console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-        return "Computer"}
+        computerScore +=  1;
+       // return "Computer"
+       }
+
+       return;
 }
 
-function addScore(playRound){
-
+function scoreBoard(){
+    console.log("Scoreboard\n -------------");
+    console.log(`Player score: ${humanScore}`);
+    console.log(`Computer score: ${computerScore}`);
 }
+
 
 function playGame(){
 
+    for(let i=0; i < 5; i++){
+        playRound(getHumanChoice(),getComputerChoice());
+        scoreBoard();
+
+        if(humanScore === 3 && computerScore === 3){
+            return "IT'S A TIEEE!! TRY AGAIN!"
+        }
+        if (humanScore === 3){
+            return "YOU WIN!!"
+        }
+        if(computerScore ===3) {
+            return "The computer wins :("
+        }
 }
+
+}
+
 
 let humanScore = 0;
 let computerScore = 0;
+let humanWins = 0;
+let computerWins = 0;
 
 
-console.log(playRound(getHumanChoice(),getComputerChoice()));
+console.log(playGame());
+
